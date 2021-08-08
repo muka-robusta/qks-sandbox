@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 public class GreeterTest {
 
+
     @Test
     public void testHelloEndpoint() {
         given()
@@ -18,4 +19,12 @@ public class GreeterTest {
              .body(is("hello"));
     }
 
+    @Test
+    void testSayHelloWithName() {
+        given()
+                .when().get("/hello/Vasya")
+                .then()
+                .statusCode(200)
+                .body(is("Hello, Vasya"));
+    }
 }

@@ -1,4 +1,4 @@
-package com.onetwostory;
+package com.onetwostory.controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -26,7 +26,7 @@ public class Greeter {
     }
 
     @GET
-    @Path("{name}")
+    @Path("/{name}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     public String greetSomeone(@PathParam("name") String name) {
