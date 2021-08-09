@@ -1,5 +1,8 @@
 package com.onetwostory.controller;
 
+import com.onetwostory.service.GreetingService;
+
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.UUID;
@@ -10,10 +13,13 @@ public class Greeter {
     private static final String EXAMPLE_TOKEN = "a6dfsdf8gfdg";
     private static final String AUTHOR_NAME = "Ilya";
 
+    @Inject
+    private GreetingService greetingService;
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "hello";
+        return greetingService.sayHello();
     }
 
     @POST

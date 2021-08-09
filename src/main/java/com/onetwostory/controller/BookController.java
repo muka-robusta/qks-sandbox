@@ -1,11 +1,13 @@
 package com.onetwostory.controller;
 
-import com.onetwostory.model.Book;
-import com.onetwostory.persistance.map.MapBookDao;
+import com.onetwostory.service.BookService;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/book")
@@ -13,28 +15,19 @@ import javax.ws.rs.core.MediaType;
 public class BookController {
 
     @Inject
-    private MapBookDao bookPersister;
+    private BookService bookService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getBooks() {
-        final StringBuilder allBooks = new StringBuilder();
-        bookPersister.findAll().forEach(book -> allBooks.append(book.toString() + "\n"));
-        return allBooks.toString();
+        return bookService.getAllBooks();
     }
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     public String addBook(String book) {
-        String[] bookInfo = book.split("-");
-        Book addedBook = bookPersister.add(new Book()
-                .setAuthor(bookInfo[0])
-                .setName(bookInfo[1])
-        );
-
-        if (addedBook.getId() != null)
-            return "success";
-        else return "fail";
+        String addedBook = bookService.addToLib(book);
+        return addedBook;
     }
 
 
