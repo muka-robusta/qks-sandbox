@@ -10,7 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 public class GreetingServiceTest extends GreetingService {
 
     @Override
-    public String sayHello(String name) {
+    public String sayHello() {
         return "Hello, Vasya";
     }
 

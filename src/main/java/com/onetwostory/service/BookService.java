@@ -6,12 +6,15 @@ import com.onetwostory.model.Book;
 import com.onetwostory.persistance.map.MapBookDao;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logmanager.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
 public class BookService {
+
+    private static final Logger LOGGER = Logger.getLogger(BookService.class.getName());
 
     @Inject
     private MapBookDao mapBookDao;
@@ -23,6 +26,7 @@ public class BookService {
     private String splitter;
 
     public String addToLib(String bookInfo) {
+        LOGGER.info(String.format("Adding to lib this book -> %s", bookInfo));
         // String[] bookInfoArray = bookInfo.split(splitter);
         String[] bookInfoArray = bookInfo.split(ConfigProvider.getConfig().getValue("book.splitter", String.class));
         final Book book = new Book()
