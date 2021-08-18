@@ -14,7 +14,7 @@ public class Greeter {
     private static final String AUTHOR_NAME = "Ilya";
 
     @Inject
-    private GreetingService greetingService;
+    GreetingService greetingService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

@@ -10,13 +10,13 @@ import java.util.Optional;
 public class GreetingService {
 
     @ConfigProperty(name = "greeting.base64")
-    private Base64Value name;
+    Base64Value name;
 
     @ConfigProperty(name = "greeting.value", defaultValue = "Hello")
-    private String greetingValue;
+    String greetingValue;
 
     @ConfigProperty(name = "greeting.name")
-    private Optional<String> greetingName;
+    Optional<String> greetingName;
 
     public GreetingService() {
     }

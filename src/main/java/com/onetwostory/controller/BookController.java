@@ -4,10 +4,7 @@ import com.onetwostory.service.BookService;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/book")
@@ -15,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 public class BookController {
 
     @Inject
-    private BookService bookService;
+    BookService bookService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -24,10 +21,10 @@ public class BookController {
     }
 
     @POST
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     public String addBook(String book) {
-        String addedBook = bookService.addToLib(book);
-        return addedBook;
+        return bookService.addToLib(book);
     }
 
 

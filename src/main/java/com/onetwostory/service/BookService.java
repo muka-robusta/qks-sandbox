@@ -10,6 +10,7 @@ import org.jboss.logmanager.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class BookService {
@@ -17,14 +18,15 @@ public class BookService {
     private static final Logger LOGGER = Logger.getLogger(BookService.class.getName());
 
     @Inject
-    private MapBookDao mapBookDao;
+    MapBookDao mapBookDao;
 
     @Inject
-    private BookConfig bookConfig;
+    BookConfig bookConfig;
 
     @ConfigProperty(name = "book.splitter")
-    private String splitter;
+    String splitter;
 
+    @Transactional
     public String addToLib(String bookInfo) {
         LOGGER.info(String.format("Adding to lib this book -> %s", bookInfo));
         // String[] bookInfoArray = bookInfo.split(splitter);
@@ -39,7 +41,7 @@ public class BookService {
 
     public String getAllBooks() {
         final StringBuilder stringBuilder = new StringBuilder();
-        mapBookDao.findAll().forEach(book -> stringBuilder.append(book.toString() + "\n"));
+        mapBookDao.findAll().forEach(book -> stringBuilder.append(book.toString()).append("\n"));
         return stringBuilder.toString();
     }
 }
