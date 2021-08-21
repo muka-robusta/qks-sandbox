@@ -1,14 +1,12 @@
 package com.onetwostory.controller;
 
 import com.onetwostory.service.BookService;
-import lombok.RequiredArgsConstructor;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/book")
-@RequiredArgsConstructor
 public class BookController {
 
     @Inject
